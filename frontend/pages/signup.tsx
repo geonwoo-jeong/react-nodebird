@@ -4,43 +4,55 @@ import { useState } from "react";
 import AppLayout from "../components/AppLayout";
 
 const Signup = () => {
-  const [id, setId] = useState("");
-  const [nickName, setNickName] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirm, setPasswordConfirm] = useState("");
-  const [term, setTerm] = useState("");
+  const useInput = (initialValue = null) => {
+    const [value, setter] = useState(initialValue);
+    const handler = event => {
+      const {
+        target: { value: inputValue }
+      } = event;
+      setter(inputValue);
+    };
 
-  const onSubmit = () => {};
-  const onChangeId = event => {
-    const {
-      target: { value }
-    } = event;
-    setId(value);
+    return [value, handler];
   };
-  const onChangeNickName = event => {
-    const {
-      target: { value }
-    } = event;
-    setNickName(value);
-  };
-  const onChangePassword = event => {
-    const {
-      target: { value }
-    } = event;
-    setPassword(value);
-  };
+
   const onChangePasswordConfirm = event => {
     const {
-      target: { value }
+      target: { value: inputValue }
     } = event;
-    setPasswordConfirm(value);
+
+    setPasswordError(inputValue !== password);
+    setPasswordConfirm(inputValue);
   };
+
   const onChangeTerm = event => {
     const {
-      target: { value }
+      target: { checked }
     } = event;
-    setTerm(value);
+    setTermError(false);
+    setTerm(checked);
   };
+
+  const onSubmit = event => {
+    event.preventDefault();
+    if (password !== passwordConfirm) {
+      return setPasswordError(true);
+    }
+    if (!term) {
+      return setTermError(true);
+    }
+    console.log({ id, nickName, password, passwordConfirm, term });
+  };
+
+  const [id, onChangeId] = useInput("");
+  const [nickName, onChangeNickName] = useInput("");
+  const [password, onChangePassword] = useInput("");
+
+  const [term, setTerm] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+
+  const [termError, setTermError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
 
   return (
     <>
@@ -92,13 +104,17 @@ const Signup = () => {
               onChange={onChangePasswordConfirm}
               required={true}
             />
+            {passwordError && (
+              <div style={{ color: "red" }}>Password Does Not Match</div>
+            )}
           </div>
           <div>
             <Checkbox name="user-term" value={term} onChange={onChangeTerm}>
               Agree
             </Checkbox>
+            {termError && <div style={{ color: "red" }}>You Need Agree.</div>}
           </div>
-          <div>
+          <div style={{ marginTop: 20 }}>
             <Button type="primary" htmlType="submit">
               Sign up
             </Button>
