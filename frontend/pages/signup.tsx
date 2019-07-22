@@ -1,19 +1,8 @@
 import { Button, Checkbox, Form, Input } from "antd";
 import { useCallback, useState } from "react";
+import useInput from "../hooks/userInput";
 
 const Signup = () => {
-  const useInput = (initialValue = null) => {
-    const [value, setter] = useState(initialValue);
-    const handler = useCallback(event => {
-      const {
-        target: { value: inputValue }
-      } = event;
-      setter(inputValue);
-    }, []);
-
-    return [value, handler];
-  };
-
   const [id, onChangeId] = useInput("");
   const [nickName, onChangeNickName] = useInput("");
   const [password, onChangePassword] = useInput("");

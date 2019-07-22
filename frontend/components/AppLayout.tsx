@@ -1,11 +1,13 @@
-import { Avatar, Button, Card, Col, Input, Menu, Row } from "antd";
+import { Avatar, Button, Card, Col, Form, Input, Menu, Row } from "antd";
 import Link from "next/link";
+import LoginForm from "./LoginForm";
 
 const AppLayout = ({ children }) => {
   const dummy = {
     Followers: [],
     Followings: [],
     Post: [],
+    isLogedIn: false,
     nickname: "Geonwoo"
   };
 
@@ -36,35 +38,42 @@ const AppLayout = ({ children }) => {
       </Link>
       <Row>
         <Col xs={24} md={6}>
-          <Card
-            actions={[
-              <div key="twit">
-                Twit
-                <br />
-                {dummy.Post.length}
-              </div>,
-              <div key="following">
-                Following
-                <br />
-                {dummy.Followings.length}
-              </div>,
-              <div key="follower">
-                Follwer
-                <br />
-                {dummy.Followers.length}
-              </div>
-            ]}
-          >
-            <Card.Meta
-              avatar={<Avatar>{dummy.nickname[0]}</Avatar>}
-              title={dummy.nickname}
-            />
-          </Card>
+          {dummy.isLogedIn ? (
+            <Card
+              actions={[
+                <div key="twit">
+                  Twit
+                  <br />
+                  {dummy.Post.length}
+                </div>,
+                <div key="following">
+                  Following
+                  <br />
+                  {dummy.Followings.length}
+                </div>,
+                <div key="follower">
+                  Follwer
+                  <br />
+                  {dummy.Followers.length}
+                </div>
+              ]}
+            >
+              <Card.Meta
+                avatar={<Avatar>{dummy.nickname[0]}</Avatar>}
+                title={dummy.nickname}
+              />
+            </Card>
+          ) : (
+            <LoginForm />
+          )}
         </Col>
-        <Col xs={24} md={12} />
-        <Col xs={24} md={6} />
+        <Col xs={24} md={12}>
+          {children}
+        </Col>
+        <Col xs={24} md={6}>
+          {" "}
+        </Col>
       </Row>
-      {children}
     </div>
   );
 };
