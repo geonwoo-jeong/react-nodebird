@@ -1,13 +1,21 @@
 import { Button, Form, Input } from "antd";
 import Link from "next/link";
+import { useCallback } from "react";
 import useInput from "../hooks/userInput";
 
 const LoginForm = () => {
   const [userId, onChangeId] = useInput("");
   const [password, onChangePassword] = useInput("");
+  const onSubmitForm = useCallback(event => {
+    event.preventDefault();
+    console.log({
+      password,
+      userId
+    });
+  }, []);
 
   return (
-    <Form>
+    <Form onSubmit={onSubmitForm} style={{ padding: "10px" }}>
       <div>
         <label htmlFor="user-id" />
         <Input

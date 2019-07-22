@@ -36,7 +36,7 @@ const AppLayout = ({ children }) => {
           <Button>Sign Up</Button>
         </a>
       </Link>
-      <Row>
+      <Row gutter={8}>
         <Col xs={24} md={6}>
           {dummy.isLogedIn ? (
             <Card
