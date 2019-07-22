@@ -1,14 +1,16 @@
-import { Avatar, Button, Card, Col, Form, Input, Menu, Row } from "antd";
+import { Col, Input, Menu, Row } from "antd";
 import Link from "next/link";
+import PropTypes from "prop-types";
 import LoginForm from "./LoginForm";
+import UserProfile from "./UserProfile";
 
 const AppLayout = ({ children }) => {
   const dummy = {
     Followers: [],
     Followings: [],
     Post: [],
-    isLogedIn: false,
-    nickname: "Geonwoo"
+    isLoggedIn: false,
+    nickName: "Geonwoo"
   };
 
   return (
@@ -31,51 +33,25 @@ const AppLayout = ({ children }) => {
           />
         </Menu.Item>
       </Menu>
-      <Link href="/signup">
-        <a>
-          <Button>Sign Up</Button>
-        </a>
-      </Link>
       <Row gutter={8}>
         <Col xs={24} md={6}>
-          {dummy.isLogedIn ? (
-            <Card
-              actions={[
-                <div key="twit">
-                  Twit
-                  <br />
-                  {dummy.Post.length}
-                </div>,
-                <div key="following">
-                  Following
-                  <br />
-                  {dummy.Followings.length}
-                </div>,
-                <div key="follower">
-                  Follwer
-                  <br />
-                  {dummy.Followers.length}
-                </div>
-              ]}
-            >
-              <Card.Meta
-                avatar={<Avatar>{dummy.nickname[0]}</Avatar>}
-                title={dummy.nickname}
-              />
-            </Card>
-          ) : (
-            <LoginForm />
-          )}
+          {dummy.isLoggedIn ? <UserProfile /> : <LoginForm />}
         </Col>
         <Col xs={24} md={12}>
           {children}
         </Col>
         <Col xs={24} md={6}>
-          {" "}
+          <Link href="https://www.gwjeong.com">
+            <a target="_blank">Made by Geonwoo Jeong</a>
+          </Link>
         </Col>
       </Row>
     </div>
   );
+};
+
+AppLayout.propTypes = {
+  children: PropTypes.node
 };
 
 export default AppLayout;
