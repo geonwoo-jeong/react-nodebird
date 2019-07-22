@@ -1,3 +1,3 @@
-const Create = () => <div>Create User!</div>
+const Create = () => <div>Create User!</div>;
 
 export default Create;
