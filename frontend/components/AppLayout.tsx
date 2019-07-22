@@ -1,12 +1,20 @@
-import { Input, Menu } from "antd";
-import React from "react";
+import { Button, Input, Menu } from "antd";
+import Link from "next/link";
 
 const AppLayout = ({ children }) => {
   return (
     <div>
       <Menu mode="horizontal">
-        <Menu.Item key="home">NodeBird</Menu.Item>
-        <Menu.Item key="profile">Profile</Menu.Item>
+        <Menu.Item key="home">
+          <Link href="/">
+            <a>NodeBird</a>
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="profile">
+          <Link href="/profile">
+            <a>Profile</a>
+          </Link>
+        </Menu.Item>
         <Menu.Item key="mail">
           <Input.Search
             enterButton={true}
@@ -14,6 +22,11 @@ const AppLayout = ({ children }) => {
           />
         </Menu.Item>
       </Menu>
+      <Link href="/signup">
+        <a>
+          <Button>Sign Up</Button>
+        </a>
+      </Link>
       {children}
     </div>
   );
