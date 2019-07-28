@@ -1,19 +1,24 @@
-export const initialState = {
+export interface IUserState {
+  isLoggedIn: boolean;
+  user: any;
+}
+
+export const initialState: IUserState = {
   isLoggedIn: false,
   user: null
 };
 
-const LOG_IN = "LOG_IN";
-const LOG_OUT = "LOG_OUT";
+export const LOG_IN = "LOG_IN";
+export const LOG_OUT = "LOG_OUT";
 
-const loginAction = {
+export const loginAction = {
   data: {
     nickName: "Geonwoo"
   },
   type: LOG_IN
 };
 
-const logoutAction = {
+export const logoutAction = {
   type: LOG_OUT
 };
 

@@ -1,15 +1,19 @@
-export const initialState = {
+export interface IPostState {
+  mainPosts: [];
+}
+
+export const initialState: IPostState = {
   mainPosts: []
 };
 
-const ADD_POST = "ADD_POST";
-const ADD_DUMMY = "ADD_DUMMY";
+export const ADD_POST = "ADD_POST";
+export const ADD_DUMMY = "ADD_DUMMY";
 
-const addPost = {
+export const addPost = {
   type: ADD_POST
 };
 
-const addDummy = {
+export const addDummy = {
   data: {
     User: {
       nickName: "Geonwoo"
