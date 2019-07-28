@@ -30,5 +30,6 @@ NodeBird.propTypes = {
 
 export default withRedux((initialState, options) => {
   const store = createStore(reducer, initialState);
+  console.log(Object.keys(options));
   return store;
 })(NodeBird);
