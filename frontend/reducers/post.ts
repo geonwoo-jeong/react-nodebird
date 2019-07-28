@@ -1,9 +1,20 @@
 export interface IPostState {
-  mainPosts: [];
+  mainPosts: any[];
+  imagePaths: any[];
 }
 
 export const initialState: IPostState = {
-  mainPosts: []
+  imagePaths: [],
+  mainPosts: [
+    {
+      User: {
+        id: 1,
+        nickName: "Geonwoo"
+      },
+      content: "First Post!!",
+      img: ""
+    }
+  ]
 };
 
 export const ADD_POST = "ADD_POST";

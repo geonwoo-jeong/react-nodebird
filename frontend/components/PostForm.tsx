@@ -1,22 +1,8 @@
 import { Button, Form, Input } from "antd";
-
-const dummy = {
-  imagePaths: [],
-  isLoggedIn: true,
-  mainPosts: [
-    {
-      User: {
-        id: 1,
-        nickname: "Geonwoo"
-      },
-      content: "First Twit",
-      img:
-        "https://bookthumb-phinf.pstatic.net/cover/137/995/13799585.jpg?udate=20180726"
-    }
-  ]
-};
+import { useSelector } from "react-redux";
 
 const PostForm = () => {
+  const { imagePaths } = useSelector((state: any) => state.post);
   return (
     <Form style={{ margin: "10px 0 20px" }} encType="multipart/form-data">
       <Input.TextArea maxLength={140} placeholder="What's New?" />
@@ -28,7 +14,7 @@ const PostForm = () => {
         </Button>
       </div>
       <div>
-        {dummy.imagePaths.map((value, index) => {
+        {imagePaths.map((value, index) => {
           return (
             <div key={value} style={{ display: "inline-block" }}>
               <img

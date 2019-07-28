@@ -1,3 +1,10 @@
+const dummyUser = {
+  Followers: [],
+  Followings: [],
+  Post: [],
+  nickName: "Geonwoo"
+};
+
 export interface IUserState {
   isLoggedIn: boolean;
   user: any;
@@ -12,9 +19,6 @@ export const LOG_IN = "LOG_IN";
 export const LOG_OUT = "LOG_OUT";
 
 export const loginAction = {
-  data: {
-    nickName: "Geonwoo"
-  },
   type: LOG_IN
 };
 
@@ -28,7 +32,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: true,
-        user: action.data
+        user: dummyUser
       };
     }
     case LOG_OUT: {
