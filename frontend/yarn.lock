@@ -870,6 +870,14 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
+"@types/redux-devtools@^3.0.47":
+  version "3.0.47"
+  resolved "https://registry.yarnpkg.com/@types/redux-devtools/-/redux-devtools-3.0.47.tgz#5c7659ccfe69774e7b312e9e061497c0e3a9e808"
+  integrity sha512-2c2tcZa5pY4slrC89Li9Qrnrdcvdnu0GCN6wJBdxLUuEM9gCw67XWQwIkrx602aO0FoYBpYmHp06eZ2ixgCHMQ==
+  dependencies:
+    "@types/react" "*"
+    redux "^4.0.4"
+
 "@types/redux@^3.6.0":
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/@types/redux/-/redux-3.6.0.tgz#f1ebe1e5411518072e4fdfca5c76e16e74c1399a"
@@ -3697,14 +3705,11 @@ neo-async@^2.5.0:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.1.tgz#ac27ada66167fa8849a6addd837f6b189ad2081c"
   integrity sha512-iyam8fBuCUpWeKPGpaNMetEocMt364qkCsfL9JuhjXX6dRnguRVOfk2GZaDpPjcOKiiXCPINZC1GczQ7iTq3Zw==
 
-<<<<<<< 6e8188d3a77c07b049e6cc990e18e981f99e7758
-=======
 next-redux-wrapper@^3.0.0-alpha.3:
   version "3.0.0-alpha.3"
   resolved "https://registry.yarnpkg.com/next-redux-wrapper/-/next-redux-wrapper-3.0.0-alpha.3.tgz#3db44012e2e36e12977816cc8726a9e2d24a9c40"
   integrity sha512-qFYQbba8u3kb71FYxOyyAg0cQ5fe9GAJVy52wuXPDEU6irGz7jOrj/8JYhFa9WJh5sSpEdnFK6vFyvihLltemw==
 
->>>>>>> fix
 next-server@9.0.2:
   version "9.0.2"
   resolved "https://registry.yarnpkg.com/next-server/-/next-server-9.0.2.tgz#8e119734c2492fd20faa7e487989b7d376d67d70"
@@ -4993,6 +4998,11 @@ readdirp@^2.2.1:
     graceful-fs "^4.1.11"
     micromatch "^3.1.10"
     readable-stream "^2.0.2"
+
+redux-devtools-extension@^2.13.8:
+  version "2.13.8"
+  resolved "https://registry.yarnpkg.com/redux-devtools-extension/-/redux-devtools-extension-2.13.8.tgz#37b982688626e5e4993ff87220c9bbb7cd2d96e1"
+  integrity sha512-8qlpooP2QqPtZHQZRhx3x3OP5skEV1py/zUdMY28WNAocbafxdG2tRD1MWE7sp8obGMNYuLWanhhQ7EQvT1FBg==
 
 redux@*, redux@^4.0.0, redux@^4.0.4:
   version "4.0.4"

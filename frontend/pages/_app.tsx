@@ -2,7 +2,8 @@ import withRedux from "next-redux-wrapper";
 import Head from "next/head";
 import PropTypes from "prop-types";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { applyMiddleware, compose, createStore } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
 import AppLayout from "../components/AppLayout";
 import reducer from "../reducers";
 
@@ -29,7 +30,9 @@ NodeBird.propTypes = {
 };
 
 export default withRedux((initialState, options) => {
-  const store = createStore(reducer, initialState);
-  console.log(Object.keys(options));
+  const middlewares = [];
+  const composeEnhancers = composeWithDevTools({});
+  const enhancer = composeEnhancers(applyMiddleware(...middlewares));
+  const store = createStore(reducer, initialState, enhancer);
   return store;
 })(NodeBird);
