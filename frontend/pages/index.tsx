@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PostCard from "../components/PostCard";
 import PostForm from "../components/PostForm";
-import { LOG_IN, loginAction } from "../reducers/user";
 
 const Home = () => {
   const { isLoggedIn, user } = useSelector((state: any) => state.user);
