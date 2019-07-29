@@ -1,6 +1,8 @@
 import { Button, Checkbox, Form, Input } from "antd";
 import { useCallback, useState } from "react";
+import { useDispatch } from "react-redux";
 import useInput from "../hooks/userInput";
+import { signUpAction } from "../reducers/user";
 
 const Signup = () => {
   const [id, onChangeId] = useInput("");
@@ -12,6 +14,8 @@ const Signup = () => {
 
   const [termError, setTermError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+
+  const dispatch = useDispatch();
 
   const onChangePasswordConfirm = useCallback(
     event => {
@@ -42,6 +46,13 @@ const Signup = () => {
       if (!term) {
         return setTermError(true);
       }
+      dispatch(
+        signUpAction({
+          id,
+          nickName,
+          password
+        })
+      );
     },
     [password, passwordConfirm, term]
   );
