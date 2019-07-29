@@ -54,15 +54,15 @@ export const REMOVE_FOLLOWER_FAILURE = "REMOVE_FOLLOWER_FAILURE";
 
 export const ADD_POST_TO_ME = "ADD_POST_TO_ME";
 
-export const loginAction = {
+export const loginRequestAction = {
   type: LOG_IN_REQUEST
 };
 
-export const logoutAction = {
+export const logoutRequestAction = {
   type: LOG_OUT_REQUEST
 };
 
-export const signUpAction = (data: any) => {
+export const signUpRequestAction = (data: any) => {
   return {
     data,
     type: SIGN_UP_REQUEST
@@ -74,8 +74,25 @@ const reducer = (state = initialState, action) => {
     case LOG_IN_REQUEST: {
       return {
         ...state,
+        isLoggingIn: true,
+        logInErrorReason: ""
+      };
+    }
+    case LOG_IN_SUCCESS: {
+      return {
+        ...state,
         isLoggedIn: true,
+        isLoggingIn: false,
         me: dummyUser
+      };
+    }
+    case LOG_IN_FAILURE: {
+      return {
+        ...state,
+        isLoggedIn: false,
+        isLoggingIn: false,
+        logInErrorReason: action.error,
+        me: null
       };
     }
     case LOG_OUT_REQUEST: {
@@ -85,6 +102,7 @@ const reducer = (state = initialState, action) => {
         me: null
       };
     }
+
     case SIGN_UP_REQUEST: {
       return {
         ...state,

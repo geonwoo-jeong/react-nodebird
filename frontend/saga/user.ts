@@ -1,6 +1,7 @@
 import {
   all,
   call,
+  delay,
   fork,
   put,
   takeEvery,
@@ -10,7 +11,9 @@ import {
   LOG_IN_FAILURE,
   LOG_IN_REQUEST,
   LOG_IN_SUCCESS,
-  SIGN_UP_REQUEST
+  SIGN_UP_FAILURE,
+  SIGN_UP_REQUEST,
+  SIGN_UP_SUCCESS
 } from "../reducers/user";
 
 function loginAPI() {}
@@ -19,7 +22,8 @@ function signUpAPI() {}
 
 function* login() {
   try {
-    yield call(loginAPI);
+    // yield call(loginAPI);
+    yield delay(2000);
     yield put({
       type: LOG_IN_SUCCESS
     });
@@ -31,11 +35,24 @@ function* login() {
   }
 }
 
+function* signUp() {
+  try {
+    yield call(signUpAPI);
+    yield put({
+      type: SIGN_UP_SUCCESS
+    });
+  } catch (error) {
+    yield put({
+      type: SIGN_UP_FAILURE
+    });
+  }
+}
+
 function* watchLogin() {
   yield takeLatest(LOG_IN_REQUEST, login);
 }
 
-function* watchSIgnup() {
+function* watchSignUp() {
   yield takeLatest(SIGN_UP_REQUEST, signUp);
 }
 
