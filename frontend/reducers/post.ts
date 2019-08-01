@@ -11,7 +11,16 @@ export const initialState = {
       content: "First Post!!",
       img: ""
     }
-  ]
+  ],
+  postAdded: false
+};
+
+const dummyPost = {
+  User: {
+    id: 1,
+    nickName: "Geonwoo"
+  },
+  content: "I'm dummy"
 };
 
 export const LOAD_MAIN_POSTS_REQUEST = "LOAD_MAIN_POSTS_REQUEST";
@@ -77,7 +86,22 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_POST_REQUEST:
       return {
-        ...state
+        ...state,
+        isAddingPost: true,
+        postAdded: false
+      };
+    case ADD_POST_SUCCESS:
+      return {
+        ...state,
+        isAddingPost: false,
+        mainPosts: [dummyPost, ...state.mainPosts],
+        postAdded: true
+      };
+    case ADD_POST_FAILURE:
+      return {
+        ...state,
+        addPostErrorReason: action.error,
+        isAddingPost: false
       };
     case ADD_DUMMY:
       return {
