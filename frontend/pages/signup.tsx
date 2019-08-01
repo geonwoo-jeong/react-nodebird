@@ -1,5 +1,6 @@
 import { Button, Checkbox, Form, Input } from "antd";
-import { useCallback, useState } from "react";
+import Router from "next/router";
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useInput from "../hooks/userInput";
 import { signUpRequestAction } from "../reducers/user";
@@ -16,7 +17,13 @@ const Signup = () => {
   const [passwordError, setPasswordError] = useState(false);
 
   const dispatch = useDispatch();
-  const { isSigningUp } = useSelector((state: any) => state.user);
+  const { isSigningUp, me } = useSelector((state: any) => state.user);
+
+  useEffect(() => {
+    if (me) {
+      Router.push("/");
+    }
+  }, [me && me.id]);
 
   const onChangePasswordConfirm = useCallback(
     event => {
