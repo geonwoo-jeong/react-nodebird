@@ -102,10 +102,29 @@ const reducer = (state = initialState, action) => {
         me: null
       };
     }
-
     case SIGN_UP_REQUEST: {
       return {
         ...state,
+        isSignedUp: false,
+        isSigningUp: true,
+        signUpErrorReason: "",
+        signUpdata: action.data
+      };
+    }
+    case SIGN_UP_SUCCESS: {
+      return {
+        ...state,
+        isSignedUp: true,
+        isSigningUp: false,
+        signUpdata: action.data
+      };
+    }
+    case SIGN_UP_FAILURE: {
+      return {
+        ...state,
+        isSignedUp: false,
+        isSigningUp: false,
+        signUpErrorReason: action.error,
         signUpdata: action.data
       };
     }

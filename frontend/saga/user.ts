@@ -38,6 +38,8 @@ function* login() {
 function* signUp() {
   try {
     yield call(signUpAPI);
+    yield delay(2000);
+    throw new Error("Error Message");
     yield put({
       type: SIGN_UP_SUCCESS
     });
