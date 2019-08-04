@@ -1,6 +1,6 @@
 import { Avatar, Button, Card, Comment, Form, Icon, Input, List } from "antd";
 import PropTypes from "prop-types";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ADD_COMMENT_REQUEST } from "../reducers/post";
 
@@ -9,20 +9,33 @@ const PostCard = ({ post }) => {
   const [commentFormOpened, setCommentFormOpended] = useState(false);
   const [commentText, setCommentText] = useState("");
   const { me } = useSelector((state: any) => state.user);
+  const { commentAdded, isAddingComment } = useSelector(
+    (state: any) => state.post
+  );
 
   const onToggleComment = useCallback(() => {
     setCommentFormOpended(prev => !prev);
   }, []);
 
-  const onSubmitComment = useCallback(event => {
-    event.preventDefault();
-    if (!me) {
-      return alert("You Need Login");
-    }
-    dispatch({
-      type: ADD_COMMENT_REQUEST
-    });
-  }, []);
+  const onSubmitComment = useCallback(
+    event => {
+      event.preventDefault();
+      if (!me) {
+        return alert("You Need Login");
+      }
+      dispatch({
+        data: {
+          postId: post.id
+        },
+        type: ADD_COMMENT_REQUEST
+      });
+    },
+    [me && me.id]
+  );
+
+  useEffect(() => {
+    setCommentText("");
+  }, [commentAdded === true]);
 
   const onChangeCommentText = useCallback(event => {
     const {
@@ -60,14 +73,14 @@ const PostCard = ({ post }) => {
                 onChange={onChangeCommentText}
               />
             </Form.Item>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit" loading={isAddingComment}>
               Twit
             </Button>
           </Form>
           <List
-            header={`${post.Comments ? post.Comment.length : 0} comment(s)`}
+            header={`${post.Comments ? post.Comments.length : 0} comment(s)`}
             itemLayout="horizontal"
-            dataSource={post.Comment || []}
+            dataSource={post.Comments || []}
             // tslint:disable-next-line: jsx-no-lambda
             renderItem={(item: any) => (
               <li>
@@ -75,7 +88,7 @@ const PostCard = ({ post }) => {
                   author={item.User.nickName}
                   avatar={<Avatar>{item.User.nickName[0]}</Avatar>}
                   content={item.content}
-                  datetime={item.createdAt}
+                  // datetime={item.createdAt}
                 />
               </li>
             )}
