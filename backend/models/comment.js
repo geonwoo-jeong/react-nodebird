@@ -1,31 +1,22 @@
 module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define(
-    "User",
+  const Comment = sequelize.define(
+    "Comment",
     {
-      nickName: {
-        type: DataTypes.STRING(20),
-        allowNull: false
-      },
-      userId: {
-        type: DataTypes.STRING(20),
-        allowNull: false,
-        unique: true
-      },
-      password: {
-        type: DataTypes.STRING(100),
+      conetnt: {
+        type: DataTypes.TEXT,
         allowNull: false
       }
     },
     {
-      charset: "utf8",
-      collate: "utf-_general_ci"
+      charset: "utf8mb4",
+      collate: "utf8mb4_general_ci"
     }
   );
 
-  User.assoicate = db => {
-    db.User.hasMany(db.Post);
-    db.User.hasMany(db.Comment);
+  Comment.assoicate = db => {
+    db.Comment.belongsTo(db.User);
+    db.Comment.belongsTo(db.Post);
   };
 
-  return User;
+  return Comment;
 };
